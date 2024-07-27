@@ -1,0 +1,191 @@
+// **********
+ion-button {
+  /* Agrega espaciado entre los botones, puedes ajustar el valor según tu preferencia */
+  width: 120px;
+  height: 48px;
+  line-height: 48px;
+}
+.button-main {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  width: calc(100% - 20px);
+  margin: 0 10px;
+}
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 5px 0;
+  margin-top: 5px;
+}
+
+// **********
+ion-radio {
+  --border-radius: 4px;
+  --inner-border-radius: 4px;
+
+  --color: #ddd;
+  --color-checked: #d9176e;
+
+  height: 34px;
+  width: 34px;
+}
+.radio-border {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px 0;
+}
+.radio-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.label-radio-title {
+  font-weight: bold;
+  font-size: large;
+  padding: 5px;
+  margin: 5px 0;
+  width: 95%;
+  background-color: #d9176e;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+.radio-group-inline {
+  display: flex;
+  justify-content: space-between; /* Distribuye los elementos en una línea */
+  width: 95%;
+}
+.radio-item {
+  display: flex;
+  align-items: center;
+}
+.radio-item ion-radio {
+  margin-right: 8px;
+}
+.radio-item ion-label {
+  margin-left: 0;
+}
+.radio-label-large {
+  font-size: 1.2em;
+  line-height: 1.5;
+  color: #d9176e;
+}
+.radio-label-selected {
+  color: #fff;
+  background-color: #d9176e;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+// **********
+.cost-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+  border-radius: 10px;
+  border: 5px solid red;
+  background-color: #242936;
+}
+// **********
+.payment-container {
+  width: 95%;
+  padding: 10px 5px;
+}
+.payment-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.payment-label-left {
+  margin: 20px;
+  color: #c50000;
+  float: left;
+  margin: 0;
+  margin-right: auto;
+  white-space: nowrap;
+  padding-right: 10px;
+  font-weight: bold;
+  padding-bottom: 2px;
+}
+.payment-label-right {
+  margin: 20px;
+  color: #c50000;
+  float: right;
+  margin: 0;
+  margin-left: auto;
+  white-space: nowrap;
+  padding-left: 10px;
+  font-weight: bold;
+  padding-bottom: 2px;
+}
+
+// **********
+.footer-main {
+  display: flex;
+  justify-content: center; /* Centro el contenedor principal */
+  align-items: center;
+  padding: 10px;
+  background-color: #d9176e;
+  color: #fff;
+  height: 60px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-main ion-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
+
+.footer-main ion-button {
+  margin: 0;
+  flex: 1;
+  max-width: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-main ion-button ion-icon {
+  font-size: 18px;
+  color: #fff;
+}
+
+// **********
+.blue-light {
+  color: #41f9f9 !important;
+  text-shadow: 0 0 5px #1a2cf8, 0 0 10px #1a2cf8, 0 0 15px #1a2cf8,
+    0 0 20px #1a2cf8, 0 0 30px #1a2cf8, 0 0 40px #1a2cf8, 0 0 55px #1a2cf8,
+    0 0 75px #1a2cf8, 0 0 100px #00f !important;
+}
+.red-light {
+  color: #ffd5cb !important;
+  text-shadow: 0 0 5px #fb062c, 0 0 10px #fb062c, 0 0 15px #fb062c,
+    0 0 20px #fb062c, 0 0 30px #fb062c, 0 0 40px #fb062c, 0 0 55px #fb062c,
+    0 0 75px #fb062c, 0 0 100px #f00 !important;
+}
+.green-light {
+  color: #76e006 !important;
+  text-shadow: 0 0 5px #398310, 0 0 10px #398310, 0 0 15px #398310,
+    0 0 20px #398310, 0 0 30px #398310, 0 0 40px #398310, 0 0 55px #398310,
+    0 0 75px #398310, 0 0 100px #0f0 !important;
+}
+.white-light {
+  color: #fff !important;
+  text-shadow: 0 0 25px #fff, 0 0 55px #fff, 0 0 100px #fff !important;
+}

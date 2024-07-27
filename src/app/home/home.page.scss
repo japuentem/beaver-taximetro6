@@ -1,27 +1,114 @@
-#container {
+// **********
+.header-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #d9176e;
+  height: 60px;
+}
+.header-text {
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "TAXI", "Roboto", "Arial", "Helvetica", "sans-serif";
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
-#container strong {
+// **********
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+  width: calc(100% - 20px);
+}
+
+// **********
+.datetime-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin: 0 10px;
+  width: 95%;
+}
+.datetime-text {
+  color: #d9176e;
   font-size: 20px;
-  line-height: 26px;
+  margin-bottom: 10px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
+// **********
+.gps-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 5px solid #f00;
+  background-color: #242936;
+  margin: 0 10px;
+  width: calc(100% - 20px);
+}
+.message-container {
+  width: 95%;
+  padding: 10px 0;
+}
+.message-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.message-gps {
+  padding: 5px;
+  border-radius: 15px;
+  font-weight: bold;
+  margin: 0;
+}
+.message-diurno {
+  padding: 5px;
+  border-radius: 15px;
+  color: #c50000;
+  font-weight: bold;
   margin: 0;
 }
 
-#container a {
-  text-decoration: none;
+// **********
+.cost-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 10px;
+  border: solid 5px #f00;
+  border-radius: 10px;
+  background-color: #242936;
+}
+.cost-text {
+  font-family: "DSDIGI", "Roboto", "Arial", "Helvetica", "sans-serif";
+  // color: #e01b2e;
+  // text-shadow: #ffe2d1 1px 0 5px;
+  color: #ffd5cb;
+  text-shadow: 0 0 5px #fb062c, 0 0 10px #fb062c, 0 0 15px #fb062c,
+    0 0 20px #fb062c, 0 0 30px #fb062c, 0 0 40px #fb062c, 0 0 55px #fb062c,
+    0 0 75px #fb062c, 0 0 100px #f00; /* Más sombra verde para hacerlo más notorio */
+  background-color: #242936;
+  text-align: center;
+  word-wrap: break-word;
+  font-size: 1.5em;
+}
+.tarifa-number {
+  text-align: left;
+  justify-content: center;
+  margin-right: 75px;
+  font-size: 80px;
+}
+.costo-number {
+  text-align: center;
+  font-size: 80px;
+}
+
+// **********
+@font-face {
+  font-family: "DSDIGI";
+  src: url("../../assets/fonts/DS-DIGI.TTF");
 }
