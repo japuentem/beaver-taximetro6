@@ -12,12 +12,19 @@ import { InfoTarifasComponent } from '../components/info-tarifas/info-tarifas.co
 import { ReporteViajesComponent } from '../components/reporte-viajes/reporte-viajes.component';
 import { AcercaDeComponent } from '../components/acerca-de/acerca-de.component'; // Asegúrate de colocar la ruta correcta
 
+import { AdmobService } from '../services/admob.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss', 'home.extra.scss'],
 })
 export class HomePage {
+  buttonLabel: string = 'Iniciar';
+  buttonColor: string = 'success';
+  buttonIcon: string = 'car';
+  selectedOption: string | null = null;
+  buttonDisabled: boolean = true;
+
   currentTime: Date;
   currentDate: string = ''; // Fecha del encabezado
 
@@ -69,7 +76,8 @@ export class HomePage {
     private gpsLocationService: GPSLocationService,
     private tarifaService: TarifaService,
     private taximetroService: TaximetroService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private admobService: AdmobService
   ) {
     this.currentTime = new Date();
     this.currentDate = this.dateTimeService.convertirFecha(this.currentTime);
@@ -81,6 +89,12 @@ export class HomePage {
     setInterval(() => {
       this.currentTime = new Date();
     }, 1000);
+
+    this.admobService.showBannerAd();
+  }
+
+  ngOnDestroy() {
+    this.admobService.hideBannerAd();
   }
 
   checkUbicacionActivada() {
@@ -103,6 +117,39 @@ export class HomePage {
     return this.tarifaService.obtenerNumeroTarifa(this.taxiSelected);
   }
 
+  handleButtonClick() {
+    switch (this.buttonLabel) {
+      case 'Iniciar':
+        this.startTravel();
+        this.buttonLabel = 'Terminar';
+        this.buttonColor = 'danger';
+        this.buttonIcon = 'hand-right-outline'; // Cambia al icono de "terminar"
+        break;
+      case 'Terminar':
+        this.stopTravel();
+        this.buttonLabel = 'Reiniciar';
+        this.buttonColor = 'primary';
+        this.buttonIcon = 'refresh-outline'; // Cambia al icono de "reiniciar"
+        break;
+      case 'Reiniciar':
+        this.restartTaximeter();
+        this.buttonLabel = 'Iniciar';
+        this.buttonColor = 'success';
+        this.buttonIcon = 'car'; // Cambia de nuevo al icono de "iniciar"
+        break;
+    }
+  }
+
+  isButtonDisabled() {
+    if (this.buttonLabel === 'Iniciar') {
+      return this.startedTrip || this.finishedTrip || !this.taxiSelected;
+    } else if (this.buttonLabel === 'Terminar') {
+      return this.finishedTrip || !this.startedTrip;
+    } else if (this.buttonLabel === 'Reiniciar') {
+      return this.startedTrip;
+    }
+    return false;
+  }
   startTravel() {
     this.startedTrip = true;
     this.finishedTrip = false;
@@ -360,5 +407,32 @@ export class HomePage {
     });
 
     await modal.present();
+  }
+
+  selectOption(option: string) {
+    if (!this.startedTrip && !this.finishedTrip) {
+      if (this.selectedOption === option) {
+        // Deselect if the same option is clicked
+        this.selectedOption = null;
+      } else {
+        this.selectedOption = option;
+      }
+      this.updateButtonState();
+    }
+  }
+
+  updateButtonState() {
+    this.buttonDisabled = this.selectedOption === null;
+  }
+
+  toggleOption(option: string) {
+    if (this.taxiSelected === option) {
+      // Desmarcar la opción si es la misma que la seleccionada
+      this.taxiSelected = '';
+    } else {
+      // Seleccionar la nueva opción
+      this.taxiSelected = option;
+    }
+    this.updateButtonState();
   }
 }

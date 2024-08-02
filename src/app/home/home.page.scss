@@ -18,80 +18,85 @@
 .app-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  margin: 0 10px;
-  width: calc(100% - 20px);
+  width: 100%;
+  height: 100%;
+  background-color: #242936;
 }
 
 // **********
 .datetime-container {
   display: flex;
-  justify-content: space-between;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin: 0 10px;
-  width: 95%;
+  width: calc(100% - 20px);
+  margin-bottom: 5px;
 }
 .datetime-text {
-  color: #d9176e;
-  font-size: 20px;
-  margin-bottom: 10px;
+  padding: 0;
+  color: #ffd5cb;
+  text-shadow: 0 0 10px #fb062c, 0 0 25px #fb062c, 0 0 50px #fb062c,
+    0 0 75px #fb062c, 0 0 100px #fb062c;
+  line-height: 1;
+  display: inline-block;
+  font-size: 1.2em;
 }
 
 // **********
 .gps-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  border: 5px solid #f00;
-  background-color: #242936;
-  margin: 0 10px;
-  width: calc(100% - 20px);
-}
-.message-container {
-  width: 95%;
-  padding: 10px 0;
-}
-.message-text {
-  display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin: 0 10px;
+  width: calc(100% - 20px);
+  margin-bottom: 5px;
+}
+.gps-text {
+  padding: 0;
+  color: #ffd5cb;
+  text-shadow: 0 0 10px #fb062c, 0 0 25px #fb062c, 0 0 50px #fb062c,
+    0 0 75px #fb062c, 0 0 100px #fb062c;
+  line-height: 1;
+  display: inline-block;
+  font-size: 1.2em;
 }
 .message-gps {
   padding: 5px;
-  border-radius: 15px;
   font-weight: bold;
   margin: 0;
+  font-size: 1.5em;
 }
 .message-diurno {
   padding: 5px;
-  border-radius: 15px;
-  color: #c50000;
+  color: #ffd5cb;
+  text-shadow: 0 0 10px #fb062c, 0 0 25px #fb062c, 0 0 50px #fb062c,
+    0 0 75px #fb062c, 0 0 100px #fb062c;
   font-weight: bold;
   margin: 0;
+  font-size: 1.5em;
 }
 
 // **********
-.cost-center-container {
+.tarifa-container {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 10px 10px;
-  border: solid 5px #f00;
+  margin: 0 10px;
+  width: calc(100% - 20px);
+  margin-bottom: 5px;
   border-radius: 10px;
-  background-color: #242936;
+  border: 5px solid #f00;
 }
 .cost-text {
   font-family: "DSDIGI", "Roboto", "Arial", "Helvetica", "sans-serif";
-  // color: #e01b2e;
-  // text-shadow: #ffe2d1 1px 0 5px;
   color: #ffd5cb;
-  text-shadow: 0 0 5px #fb062c, 0 0 10px #fb062c, 0 0 15px #fb062c,
-    0 0 20px #fb062c, 0 0 30px #fb062c, 0 0 40px #fb062c, 0 0 55px #fb062c,
-    0 0 75px #fb062c, 0 0 100px #f00; /* Más sombra verde para hacerlo más notorio */
-  background-color: #242936;
+  text-shadow: 0 0 10px #fb062c, 0 0 25px #fb062c, 0 0 50px #fb062c,
+    0 0 75px #fb062c, 0 0 100px #fb062c;
   text-align: center;
   word-wrap: break-word;
   font-size: 1.5em;
@@ -100,15 +105,57 @@
   text-align: left;
   justify-content: center;
   margin-right: 75px;
-  font-size: 80px;
+  font-size: 3em;
+  line-height: 1;
+  display: inline-block;
 }
 .costo-number {
   text-align: center;
-  font-size: 80px;
+  font-size: 3em;
+  line-height: 1;
+  display: inline-block;
 }
 
 // **********
-@font-face {
-  font-family: "DSDIGI";
-  src: url("../../assets/fonts/DS-DIGI.TTF");
+.cost-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10px;
+  width: calc(100% - 20px);
+  margin-bottom: 5px;
+}
+.payment-container {
+  width: 95%;
+  padding: 5px 5px;
+}
+.payment-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2em;
+}
+.payment-label-left,
+.payment-label-right {
+  margin: 20px;
+  margin: 0;
+  white-space: nowrap;
+  font-weight: bold;
+  padding-bottom: 2px;
+  color: #ffd5cb;
+  text-shadow: 0 0 10px #fb062c, 0 0 25px #fb062c, 0 0 50px #fb062c,
+    0 0 75px #fb062c, 0 0 100px #f00;
+}
+.payment-label-left {
+  float: left;
+  margin-right: auto;
+  padding-right: 10px;
+  padding-bottom: 2px;
+}
+.payment-label-right {
+  float: right;
+  margin-left: auto;
+  padding-left: 10px;
+  padding-bottom: 2px;
 }

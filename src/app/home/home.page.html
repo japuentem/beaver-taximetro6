@@ -3,7 +3,6 @@
     <ion-title class="header-text">TAXIMETRO</ion-title>
   </div>
 </ion-header>
-
 <ion-content [fullscreen]="true">
   <div class="app-container">
     <div class="datetime-container">
@@ -12,172 +11,138 @@
         <p>{{ currentTime | date:'hh:mm:ss a' }}</p>
       </div>
     </div>
-  </div>
 
-  <div class="gps-container">
-    <div class="message-container">
-      <div class="message-text">
+    <div class="gps-container">
+      <div class="gps-text">
         <p
           class="message-gps"
-          [ngStyle]="{'color': isLocationOn ? 'greenyellow' : 'red' }"
+          [ngClass]="{'green-light': isLocationOn, 'red-light': !isLocationOn}"
         >
           GPS
         </p>
+      </div>
+      <div class="gps-text">
         <p class="message-diurno">{{ tipoTarifa() ? 'DIURNO' : 'NOCTURNO'}}</p>
       </div>
     </div>
-  </div>
 
-  <div class="cost-center-container">
-    <h2 class="cost-text">
-      <span
-        class="tarifa-number"
-        *ngIf="startedTrip || finishedTrip"
-        [ngClass]="currentClass"
-        (click)="toggleClass()"
-      >
-        {{ obtenerNumeroTarifa() }}
-      </span>
-      <span
-        class="costo-number"
-        [ngClass]="currentClass"
-        (click)="toggleClass()"
-      >
-        {{ finishedTrip || startedTrip ? travelCost.toFixed(2) : 'LIBRE' }}
-      </span>
-    </h2>
-  </div>
-
-  <div class="cost-container">
-    <div class="payment-container">
-      <div class="payment-text">
-        <p class="payment-label-left">
-          Velocidad {{ speedometer.toFixed(2) }} km/hr
-        </p>
-        <p class="payment-label-right">
-          {{ (speedometer * 1000).toFixed(2) }} km/hr
-        </p>
-      </div>
-
-      <div class="payment-text">
-        <p
-          class="payment-label-left"
-          [ngStyle]="{ 'color': chargeByDistance ? 'greenyellow' : '#c50000' }"
+    <div class="tarifa-container">
+      <h2 class="cost-text">
+        <span
+          class="tarifa-number"
+          *ngIf="startedTrip || finishedTrip"
+          [ngClass]="currentClass"
+          (click)="toggleClass()"
         >
-          Distancia <span *ngIf="chargeByDistance"></span>
-        </p>
-        <p
-          class="payment-label-right"
-          [ngStyle]="{ 'color': chargeByTime ? 'greenyellow' : '#c50000' }"
+          {{ obtenerNumeroTarifa() }}
+        </span>
+        <span
+          class="costo-number"
+          [ngClass]="currentClass"
+          (click)="toggleClass()"
         >
-          Tiempo <span *ngIf="chargeByTime"></span>
-        </p>
-        <div style="clear: both"></div>
-      </div>
+          {{ finishedTrip || startedTrip ? travelCost.toFixed(2) : 'LIBRE' }}
+        </span>
+      </h2>
+    </div>
 
-      <div class="payment-text">
-        <p class="payment-label-left">
-          {{ (accumulatedDistance>1) ?
-          accumulatedDistance.toFixed(2):(accumulatedDistance * 1000).toFixed(2)
-          }} {{(accumulatedDistance>1)?'km.':'mt.'}}
-        </p>
-        <p class="payment-label-right">{{ timeTraveledFormatted }}</p>
-        <div style="clear: both"></div>
+    <div class="cost-container">
+      <div class="payment-container">
+        <div class="payment-text">
+          <p class="payment-label-left">
+            Velocidad
+            <!-- {{ (speedometer * 1000).toFixed(2) }} km/hr -->
+          </p>
+          <p class="payment-label-right">{{ speedometer.toFixed(2) }} km/hr</p>
+        </div>
+
+        <div class="payment-text">
+          <p
+            class="payment-label-left"
+            [ngClass]="{'green-light': chargeByDistance, 'red-light': !chargeByDistance}"
+          >
+            Distancia <span *ngIf="chargeByDistance"></span>
+          </p>
+          <p class="payment-label-right">
+            {{ (accumulatedDistance>1) ?
+            accumulatedDistance.toFixed(2):(accumulatedDistance *
+            1000).toFixed(2) }} {{(accumulatedDistance>1)?'km.':'mt.'}}
+          </p>
+
+          <div style="clear: both"></div>
+        </div>
+
+        <div class="payment-text">
+          <p
+            class="payment-label-left"
+            [ngClass]="{'green-light': chargeByTime, 'red-light': !chargeByTime}"
+          >
+            Tiempo <span *ngIf="chargeByTime"></span>
+          </p>
+          <p class="payment-label-right">{{ timeTraveledFormatted }}</p>
+          <div style="clear: both"></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="button-main">
+    <div class="radio-container">
+      <div class="radio-main">
+        <p class="label-radio-title">Tipo de taxi que abordo</p>
+      </div>
+      <div class="radio-options">
+        <div
+          class="radio-option"
+          (click)="toggleOption('libre')"
+          [class.selected]="taxiSelected === 'libre'"
+          [class.disabled]="startedTrip || finishedTrip"
+        >
+          <ion-icon
+            class="radio-icon"
+            [name]="taxiSelected === 'libre' ? 'radio-button-on' : 'radio-button-off'"
+          ></ion-icon>
+          Libre
+        </div>
+        <div
+          class="radio-option"
+          (click)="toggleOption('sitio')"
+          [class.selected]="taxiSelected === 'sitio'"
+          [class.disabled]="startedTrip || finishedTrip"
+        >
+          <ion-icon
+            class="radio-icon"
+            [name]="taxiSelected === 'sitio' ? 'radio-button-on' : 'radio-button-off'"
+          ></ion-icon>
+          Sitio
+        </div>
+        <div
+          class="radio-option"
+          (click)="toggleOption('radio')"
+          [class.selected]="taxiSelected === 'radio'"
+          [class.disabled]="startedTrip || finishedTrip"
+        >
+          <ion-icon
+            class="radio-icon"
+            [name]="taxiSelected === 'radio' ? 'radio-button-on' : 'radio-button-off'"
+          ></ion-icon>
+          Radio Taxi
+        </div>
+      </div>
+    </div>
+
     <div class="button-container">
       <ion-button
-        class="iniciar"
-        color="success"
+        shape="round"
+        [color]="buttonColor"
         expand="full"
-        (click)="startTravel()"
-        [disabled]="startedTrip || finishedTrip || !taxiSelected"
+        (click)="handleButtonClick()"
+        [disabled]="isButtonDisabled()"
       >
-        Iniciar
-      </ion-button>
-      <ion-button
-        class="terminar"
-        color="danger"
-        expand="full"
-        (click)="stopTravel()"
-        [disabled]="finishedTrip || !startedTrip"
-      >
-        Terminar
-      </ion-button>
-      <ion-button
-        class="reiniciar"
-        expand="full"
-        (click)="restartTaximeter()"
-        [disabled]="startedTrip"
-      >
-        Reiniciar
+        <ion-icon [name]="buttonIcon" slot="start"></ion-icon>
+        {{ buttonLabel }}
       </ion-button>
     </div>
-  </div>
 
-  <div class="radio-border">
-    <div class="radio-main">
-      <p class="label-radio-title">Tipo de taxi que abordo</p>
-    </div>
-    <div class="radio-main">
-      <ion-radio-group
-        class="radio-group-inline"
-        [allowEmptySelection]="true"
-        [(ngModel)]="taxiSelected"
-        [disabled]="startedTrip || finishedTrip"
-      >
-        <ion-item lines="none" class="radio-item">
-          <ion-radio
-            labelPlacement="start"
-            value="libre"
-            [ngClass]="{'radio-selected': taxiSelected === 'libre'}"
-            [disabled]="startedTrip || finishedTrip"
-          ></ion-radio>
-          <ion-label
-            class="radio-label-large"
-            [ngClass]="{'radio-label-selected': taxiSelected === 'libre'}"
-            (click)="selectRadio('libre')"
-          >
-            Libre
-          </ion-label>
-        </ion-item>
-
-        <ion-item lines="none" class="radio-item">
-          <ion-radio
-            labelPlacement="start"
-            value="sitio"
-            [ngClass]="{'radio-selected': taxiSelected === 'sitio'}"
-            [disabled]="startedTrip || finishedTrip"
-          ></ion-radio>
-          <ion-label
-            class="radio-label-large"
-            [ngClass]="{'radio-label-selected': taxiSelected === 'sitio'}"
-            (click)="selectRadio('sitio')"
-          >
-            Sitio
-          </ion-label>
-        </ion-item>
-
-        <ion-item lines="none" class="radio-item">
-          <ion-radio
-            labelPlacement="start"
-            value="radio"
-            [ngClass]="{'radio-selected': taxiSelected === 'radio'}"
-            [disabled]="startedTrip || finishedTrip"
-          ></ion-radio>
-          <ion-label
-            class="radio-label-large"
-            [ngClass]="{'radio-label-selected': taxiSelected === 'radio'}"
-            (click)="selectRadio('radio')"
-          >
-            Radio Taxi
-          </ion-label>
-        </ion-item>
-      </ion-radio-group>
-    </div>
+    <div class="ad-container"></div>
   </div>
 </ion-content>
 
